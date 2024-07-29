@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import ItemCard from "@/components/ItemCard";
 import Explanation from "@/components/Explanation";
+import {NextResponse} from "next/server";
+import supabase from "@/app/api/data/route";
 
 interface Data {
     title: string;
@@ -20,9 +22,26 @@ export default function Home() {
     };
 
     useEffect(() => {
-        fetch('/api/data')
-            .then((response) => response.json())
-            .then((data) => setData(data));
+        async function fetchData(){
+            let { data, error } = await supabase
+                .from('airtask')
+                .select('*')
+
+            if (error) {
+                console.log('Error while connecting to database or while fetching data:', error);
+                return NextResponse.json({ error: error.message }, { status: 500 });
+            }
+            else{
+                if(data === null){
+                    setData([]);
+                    console.log('Connected to database successfully!');
+                }else{
+                    setData(data);
+                    console.log('Connected to database successfully!');
+                }
+            }
+        }
+        fetchData();
     }, []);
 
     return (

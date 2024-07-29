@@ -19,3 +19,5 @@ export async function GET() {
     console.log('Connected to database successfully!')
     return NextResponse.json(data, { status: 200 });
 }
+
+export default supabase;
