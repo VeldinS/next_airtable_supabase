@@ -1,10 +1,11 @@
 'use client'
 
+import supabase from "@/app/api/data/route";
+import {NextResponse} from "next/server";
 import { useEffect, useState } from 'react';
+
 import ItemCard from "@/components/ItemCard";
 import Explanation from "@/components/Explanation";
-import {NextResponse} from "next/server";
-import supabase from "@/app/api/data/route";
 
 interface Data {
     title: string;
