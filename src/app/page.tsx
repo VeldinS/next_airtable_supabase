@@ -1,17 +1,23 @@
 'use client'
 
-import {Card, CardHeader, CardBody, Image} from "@nextui-org/react";
 import { useEffect, useState } from 'react';
+import ItemCard from "@/components/ItemCard";
+import Explanation from "@/components/Explanation";
 
 interface Data {
     title: string;
     image: string;
-    short_description: string;
+    description: string;
 }
 
 export default function Home() {
 
     const [data, setData] = useState<Data[]>([]);
+    const [showExplanation, setShowExplanation] = useState(true);
+
+    const toggleExplanation = () => {
+        setShowExplanation(!showExplanation);
+    };
 
     useEffect(() => {
         fetch('/api/data')
@@ -20,24 +26,24 @@ export default function Home() {
     }, []);
 
     return (
-        <section className={'w-screen h-auto px-[10%] py-16 items-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'}>
-            {data.map((item, index) => (
-                    <Card className="py-4 w-full flex flex-col items-start justify-start" key={index}>
-                        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start justify-start">
-                            <p className="text-tiny uppercase font-bold">{item.title}</p>
-                            <p className="text-default-500">{item.short_description}</p>
-                        </CardHeader>
-                        <CardBody className="overflow-visible py-2 w-full">
-                            <Image
-                                alt="Card background"
-                                className="object-cover rounded-xl"
-                                src={item.image}
-                                width={300}
-                                height={200}
-                            />
-                        </CardBody>
-                    </Card>
-            ))}
+        <section
+            className={'bg-[#050B20] w-screen h-auto min-h-screen px-[10%] py-16 flex flex-col items-center justify-start gap-12 font-poppins'}>
+            <button
+                className={'text-white bg-red-500 px-4 py-2 rounded cursor-pointer'}
+                onClick={toggleExplanation}
+            >
+                {showExplanation ? 'Hide explanation & credentials' : 'Show explanation & credentials'}
+            </button>
+
+            {showExplanation && <Explanation/>}
+
+            <p className={'text-white text-xl uppercase font-bold tracking-wider'}>SOLUTION</p>
+
+            <div className={'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'}>
+                {data.map((item, index) => (
+                    <ItemCard key={index} title={item.title} description={item.description} image={item.image}/>
+                ))}
+            </div>
         </section>
     );
 };
