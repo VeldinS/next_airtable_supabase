@@ -20,19 +20,20 @@ export default function Home() {
     }, []);
 
     return (
-        <section className={'w-screen h-auto px-[10%] py-16 items-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'}>
+        <section className={'w-screen h-auto px-[10%] py-16 items-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'}>
             {data.map((item, index) => (
-                    <Card className="py-4 w-full flex items-start justify-start" key={index}>
-                        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                    <Card className="py-4 w-full flex flex-col items-start justify-start" key={index}>
+                        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start justify-start">
                             <p className="text-tiny uppercase font-bold">{item.title}</p>
                             <p className="text-default-500">{item.short_description}</p>
                         </CardHeader>
-                        <CardBody className="overflow-visible py-2">
+                        <CardBody className="overflow-visible py-2 w-full">
                             <Image
                                 alt="Card background"
                                 className="object-cover rounded-xl"
                                 src={item.image}
-                                width={270}
+                                width={300}
+                                height={200}
                             />
                         </CardBody>
                     </Card>
