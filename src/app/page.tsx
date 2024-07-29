@@ -1,6 +1,6 @@
 'use client'
 
-import supabase from "@/app/api/data/route";
+import supabase from '@/lib/supabase';
 import {NextResponse} from "next/server";
 import { useEffect, useState } from 'react';
 
