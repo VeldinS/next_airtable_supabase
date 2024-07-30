@@ -1,6 +1,7 @@
 import React from 'react';
 import './globals.css';
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/react';
 import { NextUIProvider } from '@nextui-org/react';
 import { Inter, Poppins } from 'next/font/google';
 
@@ -23,6 +24,7 @@ const RootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <NextUIProvider>
             {children}
           </NextUIProvider>
+        <Analytics />
         </body>
       </html>
   );
