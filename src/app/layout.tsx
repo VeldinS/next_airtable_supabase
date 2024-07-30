@@ -1,36 +1,31 @@
-import React from "react";
-import "./globals.css";
+import React from 'react';
+import './globals.css';
+import type { Metadata } from 'next';
+import { NextUIProvider } from '@nextui-org/react';
+import { Inter, Poppins } from 'next/font/google';
 
-import type { Metadata } from "next";
-import {NextUIProvider} from "@nextui-org/react";
-
-import {Inter, Poppins} from "next/font/google";
-
-
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 const poppins = Poppins({
-  subsets: ["latin"],
+  subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-rubik'
+  variable: '--font-rubik',
 });
 
 export const metadata: Metadata = {
-  title: "Veldin Task ",
-  description: "Interview task using Next.js, Airtable & Supabase",
+  title: 'Veldin Task',
+  description: 'Interview task using Next.js, Airtable & Supabase',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+const RootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <html lang="en">
-      <body className={`${poppins.className} ${inter.className}`}>
-        <NextUIProvider>
-          {children}
-        </NextUIProvider>
-      </body>
-    </html>
+      <html lang="en">
+        <body className={`${poppins.className} ${inter.className}`}>
+          <NextUIProvider>
+            {children}
+          </NextUIProvider>
+        </body>
+      </html>
   );
-}
+};
+
+export default RootLayout;
